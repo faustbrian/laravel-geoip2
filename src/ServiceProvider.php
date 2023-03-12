@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace PreemStudio\GeoIp2;
 
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use PreemStudio\Jetpack\Package\AbstractServiceProvider;
+use PreemStudio\Jetpack\Package\Package;
 
-class ServiceProvider extends PackageServiceProvider
+class ServiceProvider extends AbstractServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
             ->name('laravel-geoip2')
-            ->hasConfigFile('laravel-geoip2')
-            ->hasInstallCommand(fn (InstallCommand $command) => $command->publishConfigFile());
+            ->hasConfigFile('laravel-geoip2');
     }
 
-    public function bootingPackage()
+    public function bootingPackage(): void
     {
         $this->publishes([
             __DIR__.'/../data/GeoLite2-City.mmdb'    => storage_path('app/GeoIp2/GeoLite2-City.mmdb'),
