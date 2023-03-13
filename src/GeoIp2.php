@@ -8,7 +8,7 @@ use GeoIp2\Database\Reader;
 use GeoIp2\Model\City;
 use GeoIp2\Model\Country;
 
-class GeoIp2
+final class GeoIp2
 {
     private Reader $readerCity;
 
