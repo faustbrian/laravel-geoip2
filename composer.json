@@ -39,7 +39,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "PreemStudio\\Geoip2\\": "src"
+            "PreemStudio\\GeoIp2\\": "src"
         }
     },
     "autoload-dev": {
@@ -58,7 +58,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "PreemStudio\\Geoip2\\ServiceProvider"
+                "PreemStudio\\GeoIp2\\ServiceProvider"
             ]
         }
     },
