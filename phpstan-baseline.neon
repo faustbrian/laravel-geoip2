@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method PreemStudio\\\\GeoIp2\\\\GeoIp2\\:\\:city\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: src/GeoIp2.php
+
+		-
+			message: "#^Method PreemStudio\\\\GeoIp2\\\\GeoIp2\\:\\:country\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: src/GeoIp2.php
