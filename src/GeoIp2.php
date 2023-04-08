@@ -16,7 +16,7 @@ final class GeoIp2
 
     public function __construct(array $config)
     {
-        $this->readerCity    = new Reader($config['city']);
+        $this->readerCity = new Reader($config['city']);
         $this->readerCountry = new Reader($config['country']);
     }
 
