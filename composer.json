@@ -17,9 +17,9 @@
     "homepage": "https://github.com/BombenProdukt/laravel-geoip2",
     "require": {
         "php": "^8.2",
-        "geoip2/geoip2": "*",
-        "illuminate/contracts": "^10.0",
-        "bombenprodukt/laravel-package-powerpack": "^1.0"
+        "bombenprodukt/laravel-package-powerpack": "^1.0",
+        "geoip2/geoip2": "^2.13",
+        "illuminate/contracts": "^10.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.30",
