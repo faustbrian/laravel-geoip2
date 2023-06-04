@@ -29,6 +29,6 @@ final class GeoIp2
 
     private function getPath(string $edition): string
     {
-        return \sprintf('%s/%s', Config::get('geoip2.storage_path'), $edition);
+        return \sprintf('%s/%s.mmdb', Config::get('geoip2.storage_path'), $edition);
     }
 }

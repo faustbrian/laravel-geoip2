@@ -1,11 +1,61 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Parameter \\#1 \\$edition of method BombenProdukt\\\\GeoIp2\\\\Commands\\\\DownloadDatabases\\:\\:decompress\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Parameter \\#1 \\$edition of method BombenProdukt\\\\GeoIp2\\\\Commands\\\\DownloadDatabases\\:\\:download\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Parameter \\#1 \\$edition of method BombenProdukt\\\\GeoIp2\\\\Commands\\\\DownloadDatabases\\:\\:extract\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Parameter \\#1 \\$edition of method BombenProdukt\\\\GeoIp2\\\\Commands\\\\DownloadDatabases\\:\\:move\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Parameter \\#1 \\$path of static method Illuminate\\\\Support\\\\Facades\\\\File\\:\\:ensureDirectoryExists\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
+			count: 5
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Parameter \\#3 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
+			message: "#^Method BombenProdukt\\\\GeoIp2\\\\GeoIp2\\:\\:asn\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: src/GeoIp2.php
+
+		-
 			message: "#^Method BombenProdukt\\\\GeoIp2\\\\GeoIp2\\:\\:city\\(\\) has parameter \\$ip with no type specified\\.$#"
 			count: 1
 			path: src/GeoIp2.php
 
 		-
 			message: "#^Method BombenProdukt\\\\GeoIp2\\\\GeoIp2\\:\\:country\\(\\) has parameter \\$ip with no type specified\\.$#"
+			count: 1
+			path: src/GeoIp2.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
 			count: 1
 			path: src/GeoIp2.php
