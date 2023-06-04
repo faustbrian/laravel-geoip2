@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use PharData;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Throwable;
 
 final class DownloadDatabases extends Command
@@ -43,6 +45,8 @@ final class DownloadDatabases extends Command
                 $this->decompress($edition);
 
                 $this->extract($edition);
+
+                $this->move($edition);
             } catch (Throwable $th) {
                 $this->error($th->getMessage());
             }
@@ -51,36 +55,72 @@ final class DownloadDatabases extends Command
 
     private function download(string $edition): void
     {
+        if (File::exists($this->getCompressed($edition))) {
+            File::delete($this->getCompressed($edition));
+        }
+
         File::put(
-            $this->getCompressedPath($edition),
-            Http::get($this->getLink($edition))->body(),
+            $this->getCompressed($edition),
+            Http::get($this->getLink($edition))->throw()->body(),
         );
     }
 
     private function decompress(string $edition): void
     {
-        $phar = new PharData($this->getCompressedPath($edition));
+        if (File::exists($this->getDecompressed($edition))) {
+            File::delete($this->getDecompressed($edition));
+        }
+
+        $phar = new PharData($this->getCompressed($edition));
         $phar->decompress();
 
-        File::delete($this->getCompressedPath($edition));
+        File::delete($this->getCompressed($edition));
     }
 
     private function extract(string $edition): void
     {
-        $phar = new PharData($this->getDecompressedPath($edition));
+        if (File::isDirectory($this->getExtractPath($edition))) {
+            File::deleteDirectory($this->getExtractPath($edition));
+        }
+
+        $phar = new PharData($this->getDecompressed($edition));
         $phar->extractTo($this->getExtractPath($edition));
 
-        File::delete($this->getDecompressedPath($edition));
+        File::delete($this->getDecompressed($edition));
     }
 
-    private function getCompressedPath(string $edition): string
+    private function move(string $edition): void
+    {
+        $finder = Finder::create();
+        $finder
+            ->in($this->getExtractPath($edition))
+            ->depth(1)
+            ->filter(fn (SplFileInfo $file) => \str_ends_with($file->getPathname(), '.mmdb'));
+
+        $iterator = $finder->getIterator();
+        $iterator->rewind();
+
+        File::move(
+            $iterator->current()->getPathname(),
+            $this->getMmdbPath($edition),
+        );
+
+        File::deleteDirectory($this->getExtractPath($edition));
+    }
+
+    private function getCompressed(string $edition): string
     {
         return \sprintf('%s/%s.tar.gz', Config::get('geoip2.storage_path'), $edition);
     }
 
-    private function getDecompressedPath(string $edition): string
+    private function getDecompressed(string $edition): string
     {
         return \sprintf('%s/%s.tar', Config::get('geoip2.storage_path'), $edition);
+    }
+
+    private function getMmdbPath(string $edition): string
+    {
+        return \sprintf('%s/%s.mmdb', Config::get('geoip2.storage_path'), $edition);
     }
 
     private function getExtractPath(string $edition): string

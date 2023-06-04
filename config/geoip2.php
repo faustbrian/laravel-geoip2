@@ -7,5 +7,5 @@ return [
 
     'storage_path' => storage_path('app/geoip2'),
 
-    'editions' => ['GeoLite2-ASN', 'GeoIP2-City', 'GeoLite2-Country'],
+    'editions' => ['GeoLite2-ASN', 'GeoLite2-City', 'GeoLite2-Country'],
 ];
