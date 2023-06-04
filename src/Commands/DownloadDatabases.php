@@ -7,7 +7,9 @@ namespace BombenProdukt\GeoIp2\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use PharData;
+use Throwable;
 
 final class DownloadDatabases extends Command
 {
@@ -33,19 +35,26 @@ final class DownloadDatabases extends Command
         File::ensureDirectoryExists(Config::get('geoip2.storage_path'));
 
         foreach (Config::get('geoip2.editions') as $edition) {
-            $this->info(\sprintf('Downloading %s', $edition));
+            try {
+                $this->info(\sprintf('Downloading %s', $edition));
 
-            $this->download($edition);
+                $this->download($edition);
 
-            $this->decompress($edition);
+                $this->decompress($edition);
 
-            $this->extract($edition);
+                $this->extract($edition);
+            } catch (Throwable $th) {
+                $this->error($th->getMessage());
+            }
         }
     }
 
     private function download(string $edition): void
     {
-        File::put($this->getCompressedPath($edition), $this->getLink($edition));
+        File::put(
+            $this->getCompressedPath($edition),
+            Http::get($this->getLink($edition))->body(),
+        );
     }
 
     private function decompress(string $edition): void
@@ -81,6 +90,6 @@ final class DownloadDatabases extends Command
 
     private function getLink(string $edition): string
     {
-        return \sprintf('https://download.maxmind.com/app/geoip_download?edition_id=%s&license_key=%s&suffix=tar.gz', $edition, Config::get('geoip2.storage_path'));
+        return \sprintf('https://download.maxmind.com/app/geoip_download?edition_id=%s&license_key=%s&suffix=tar.gz', $edition, Config::get('geoip2.license_key'));
     }
 }
