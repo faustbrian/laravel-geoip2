@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 return [
-    'city' => storage_path('app/GeoIp2/GeoLite2-City.mmdb'),
-    'country' => storage_path('app/GeoIp2/GeoLite2-Country.mmdb'),
+    'license_key' => env('GEOIP2_LICENSE_KEY'),
+
+    'storage_path' => storage_path('app/geoip2'),
+
+    'editions' => ['GeoLite2-ASN', 'GeoIP2-City', 'GeoLite2-Country'],
 ];
