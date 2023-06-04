@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BombenProdukt\Lighty\Command;
+namespace BombenProdukt\GeoIp2\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
