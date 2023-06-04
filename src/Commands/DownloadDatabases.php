@@ -42,9 +42,20 @@ final class DownloadDatabases extends Command
 
                 $this->download($edition);
 
-                $this->decompress($edition);
+                if (\str_ends_with($edition, '-CSV')) {
+                    if (File::isDirectory($this->getExtractPath($edition))) {
+                        File::deleteDirectory($this->getExtractPath($edition));
+                    }
 
-                $this->extract($edition);
+                    $phar = new PharData($this->getCompressed($edition));
+                    $phar->extractTo($this->getExtractPath($edition));
+
+                    File::delete($this->getCompressed($edition));
+                } else {
+                    $this->decompress($edition);
+
+                    $this->extract($edition);
+                }
 
                 $this->move($edition);
             } catch (Throwable $th) {
@@ -91,18 +102,24 @@ final class DownloadDatabases extends Command
 
     private function move(string $edition): void
     {
+        $extension = 'mmdb';
+
+        if (\str_ends_with($edition, '-CSV')) {
+            $extension = 'csv';
+        }
+
         $finder = Finder::create();
         $finder
             ->in($this->getExtractPath($edition))
             ->depth(1)
-            ->filter(fn (SplFileInfo $file) => \str_ends_with($file->getPathname(), '.mmdb'));
+            ->filter(fn (SplFileInfo $file) => \str_ends_with($file->getPathname(), '.'.$extension));
 
         $iterator = $finder->getIterator();
         $iterator->rewind();
 
         File::move(
             $iterator->current()->getPathname(),
-            $this->getMmdbPath($edition),
+            $this->getDecompressedFilePath($edition),
         );
 
         File::deleteDirectory($this->getExtractPath($edition));
@@ -110,6 +127,10 @@ final class DownloadDatabases extends Command
 
     private function getCompressed(string $edition): string
     {
+        if (\str_ends_with($edition, '-CSV')) {
+            return \sprintf('%s/%s.zip', Config::get('geoip2.storage_path'), $edition);
+        }
+
         return \sprintf('%s/%s.tar.gz', Config::get('geoip2.storage_path'), $edition);
     }
 
@@ -118,8 +139,12 @@ final class DownloadDatabases extends Command
         return \sprintf('%s/%s.tar', Config::get('geoip2.storage_path'), $edition);
     }
 
-    private function getMmdbPath(string $edition): string
+    private function getDecompressedFilePath(string $edition): string
     {
+        if (\str_ends_with($edition, '-CSV')) {
+            return \sprintf('%s/%s.csv', Config::get('geoip2.storage_path'), $edition);
+        }
+
         return \sprintf('%s/%s.mmdb', Config::get('geoip2.storage_path'), $edition);
     }
 
@@ -130,6 +155,10 @@ final class DownloadDatabases extends Command
 
     private function getLink(string $edition): string
     {
+        if (\str_ends_with($edition, '-CSV')) {
+            return \sprintf('https://download.maxmind.com/app/geoip_download?edition_id=%s&license_key=%s&suffix=zip', $edition, Config::get('geoip2.license_key'));
+        }
+
         return \sprintf('https://download.maxmind.com/app/geoip_download?edition_id=%s&license_key=%s&suffix=tar.gz', $edition, Config::get('geoip2.license_key'));
     }
 }
