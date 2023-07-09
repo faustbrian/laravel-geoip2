@@ -4,20 +4,6 @@
     </a>
 </p>
 
-<p align="center">
-    <a href="https://github.com/faustbrian/laravel-geoip2/actions">
-        <img src="https://badge.sh/github/check-runs/BombenProdukt/laravel-geoip2" alt="Checks" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/laravel-geoip2">
-        <img src="https://badge.sh/packagist/downloads/BombenProdukt/laravel-geoip2" alt="Downloads" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/laravel-geoip2">
-        <img src="https://badge.sh/packagist/version/BombenProdukt/laravel-geoip2" alt="Version" />
-    </a>
-    <a href="https://packagist.org/packages/bombenprodukt/laravel-geoip2">
-        <img src="https://badge.sh/packagist/license/BombenProdukt/laravel-geoip2" alt="License" />
-    </a>
-</p>
 
 ## About Laravel GeoIP2
 
