@@ -14,7 +14,7 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/BombenProdukt/laravel-geoip2",
+    "homepage": "https://github.com/faustbrian/laravel-geoip2",
     "require": {
         "php": "^8.2",
         "bombenprodukt/laravel-package-powerpack": "^1.0",
