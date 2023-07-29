@@ -6,6 +6,11 @@ parameters:
 			path: src/Commands/DownloadDatabases.php
 
 		-
+			message: "#^PHPDoc type string of property BombenProdukt\\\\GeoIp2\\\\Commands\\\\DownloadDatabases\\:\\:\\$description is not the same as PHPDoc type string\\|null of overridden property Illuminate\\\\Console\\\\Command\\:\\:\\$description\\.$#"
+			count: 1
+			path: src/Commands/DownloadDatabases.php
+
+		-
 			message: "#^Parameter \\#1 \\$edition of method BombenProdukt\\\\GeoIp2\\\\Commands\\\\DownloadDatabases\\:\\:decompress\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: src/Commands/DownloadDatabases.php
