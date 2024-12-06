@@ -1,0 +1,18 @@
+{
+    "symbol-whitelist": [
+        "array",
+        "bool",
+        "false",
+        "int",
+        "null",
+        "self",
+        "string",
+        "true",
+        "Illuminate\\Console\\Command",
+        "Illuminate\\Support\\Facades\\Config",
+        "Illuminate\\Support\\Facades\\Facade",
+        "Illuminate\\Support\\Facades\\File",
+        "Illuminate\\Support\\Facades\\Http",
+        "Symfony\\Component\\Finder\\Finder"
+    ]
+}

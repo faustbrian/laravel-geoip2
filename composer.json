@@ -1,0 +1,62 @@
+{
+    "name": "basecodeoy/geoip2",
+    "description": "A package to easily use GeoIP2 with Laravel.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "BaseCode Oy",
+        "laravel",
+        "geoip2"
+    ],
+    "authors": [
+        {
+            "name": "Brian Faust",
+            "email": "hello@basecode.sh",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/basecodeoy/geoip2",
+    "support": {
+        "issues": "https://github.com/basecodeoy/geoip2/issues",
+        "source": "https://github.com/basecodeoy/geoip2",
+        "security": "https://github.com/basecodeoy/geoip2/blob/main/.github/SECURITY.md"
+    },
+    "require": {
+        "php": "^8.3",
+        "basecodeoy/crate": "^1.0.0",
+        "geoip2/geoip2": "^2.13",
+        "illuminate/contracts": "^11.0"
+    },
+    "require-dev": {
+        "basecodeoy/standards": "^1.1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "BaseCodeOy\\GeoIp2\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        },
+        "audit": {
+            "abandoned": "report"
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BaseCodeOy\\GeoIp2\\ServiceProvider"
+            ]
+        }
+    }
+}
